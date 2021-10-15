@@ -1,5 +1,6 @@
 import List from '../repositories/User/list';
 import findById from '../repositories/User/findById';
+import Delete from '../repositories/User/delete';
 class UserController {
   async index(req, res) {
     return res
@@ -19,6 +20,15 @@ class UserController {
   async findById(req, res) {
     try {
       const user = await findById(req.params);
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json('Internal server error');
+    }
+  }
+
+  async delete(req, res) {
+    try {
+      const user = await Delete(req.params);
       return res.status(200).json(user);
     } catch (error) {
       return res.status(500).json('Internal server error');
