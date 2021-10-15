@@ -1,4 +1,5 @@
 import List from '../repositories/User/list';
+import findById from '../repositories/User/findById';
 class UserController {
   async index(req, res) {
     return res
@@ -10,6 +11,15 @@ class UserController {
     try {
       const users = await List();
       return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json('Internal server error');
+    }
+  }
+
+  async findById(req, res) {
+    try {
+      const user = await findById(req.params);
+      return res.status(200).json(user);
     } catch (error) {
       return res.status(500).json('Internal server error');
     }
