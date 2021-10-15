@@ -6,11 +6,11 @@ const findById = async (data) => {
 
   const isValid = mongoose.Types.ObjectId.isValid(id);
 
-  if (!isValid) return { message: 'Necessário informar um id válido' };
+  if (!isValid) return { message: 'Necessário informar um id válido!' };
 
   const user = await User.findById(id);
 
-  if (!user) return {};
+  if (!user) return { message: 'Usuário não foi encontrado!' };
 
   return user;
 };

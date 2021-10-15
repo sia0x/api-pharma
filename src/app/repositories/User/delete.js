@@ -6,11 +6,11 @@ const remove = async (data) => {
 
   const isValid = mongoose.Types.ObjectId.isValid(id);
 
-  if (!isValid) return { message: 'Necessário informar um id válido' };
+  if (!isValid) return { message: 'Necessário informar um id válido!' };
 
   const user = await User.findByIdAndDelete(id);
 
-  if (!user) return {};
+  if (!user) return { message: 'Usuário não foi encontrado!' };
 
   return { message: 'Usuário deletado com sucesso!' };
 };
