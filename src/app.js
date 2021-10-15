@@ -1,11 +1,14 @@
 import express from 'express';
+import './database';
 import routes from './routes';
+import cronImportUserData from './app/cron/importUser';
 class App {
   constructor() {
     this.server = express();
 
     this.middlewares();
     this.routes();
+    this.cronJobs();
   }
 
   middlewares() {
@@ -14,6 +17,10 @@ class App {
 
   routes() {
     this.server.use(routes);
+  }
+
+  cronJobs() {
+    cronImportUserData();
   }
 }
 
