@@ -2,6 +2,12 @@
 
 Rest Api da empresa Pharma Inc, para facilitar a gestão e visualização da informação dos seus pacientes de maneira simples e objetiva em um Dashboard onde podem listar, filtrar e expandir os dados disponíveis.
 
+#
+
+> ## challenge by coodesh
+
+#
+
 > ## Bibliotecas e Ferramentas
 
 - YARN
@@ -14,6 +20,8 @@ Rest Api da empresa Pharma Inc, para facilitar a gestão e visualização da inf
 - Sucrase
 - Nodemon
 
+#
+
 > ## Features do Node
 
 - API Rest com Express
@@ -21,6 +29,8 @@ Rest Api da empresa Pharma Inc, para facilitar a gestão e visualização da inf
 - CORS
 - Middleware
 - Nível de Acesso nas Rotas (User)
+
+#
 
 > ## Instruções de uso do projeto
 
@@ -49,6 +59,8 @@ Rest Api da empresa Pharma Inc, para facilitar a gestão e visualização da inf
 7. Iniciar o servidor
 
 - yarn dev ou npm run dev
+
+#
 
 > ## APIs desenvolvidas
 
