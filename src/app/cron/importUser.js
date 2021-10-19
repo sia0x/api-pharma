@@ -6,7 +6,7 @@ let page = 1;
 
 const getDatafromRandomUserApi = async () => {
   const user = [];
-  while (page <= 5) {
+  while (page <= 20) {
     const { results } = (
       await randomUserApi.get('/api/', {
         params: { page, results: 100 },
