@@ -1,7 +1,10 @@
 import express from 'express';
 import fs from 'fs';
+import authMiddleware from './app/middlewares/auth';
 
 const route = express();
+
+route.use(authMiddleware);
 
 const autoloadRoutes = (route) => {
   fs.readdir(`${__dirname}/routes`, (err, files) => {
