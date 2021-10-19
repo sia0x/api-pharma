@@ -21,18 +21,26 @@ const getDatafromRandomUserApi = async () => {
   return user;
 };
 
-const importUserData = async (user) => {
-  if (user && user.results.length > 0) {
-    user.results.map(async (result) => {
+const importUserDataToMongo = async (user) => {
+  if (user && user.length > 0) {
+    user.map(async (result) => {
       Object.assign(result, { imported_t: new Date(), status: 'published' });
 
       const data = UserCollection.create(result);
     });
+
+    console.log('dados importados para o mongo');
   }
 };
 
+const getDataAndImport = async () => {
+  const user = await getDatafromRandomUserApi();
+
+  importUserDataToMongo(user);
+};
+
 const cronImportUserData = () => {
-  const job = new CronJob('02 19 * * FRI', async () => importUserData(user));
+  const job = new CronJob('00 01 * * *', async () => getDataAndImport());
   job.start();
 };
 
