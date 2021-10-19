@@ -23,6 +23,9 @@ class UserController {
       const user = await findById(req.params);
       return res.status(200).json(user);
     } catch (error) {
+      if (error && error.status) {
+        return res.status(error.status).json({ message: error.message });
+      }
       return res.status(500).json('Internal server error');
     }
   }
@@ -32,6 +35,9 @@ class UserController {
       const user = await Update({ ...req.params, ...req.body });
       return res.status(200).json(user);
     } catch (error) {
+      if (error && error.status) {
+        return res.status(error.status).json({ message: error.message });
+      }
       return res.status(500).json('Internal server error');
     }
   }
@@ -41,6 +47,12 @@ class UserController {
       const user = await Delete(req.params);
       return res.status(200).json(user);
     } catch (error) {
+      if (error && error.status) {
+        return res.status(error.status).json({ message: error.message });
+      }
+      if (error && error.fieldWithError) {
+        return res.status(400).json({ message: error.message });
+      }
       return res.status(500).json('Internal server error');
     }
   }
