@@ -7,8 +7,8 @@ export function encode(data) {
 
   return jwt.sign(
     {
-      uuid: 'teste',
-      username: 'teste',
+      uuid,
+      username,
     },
     secret,
     {
