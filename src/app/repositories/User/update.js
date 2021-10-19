@@ -1,12 +1,18 @@
 import mongoose from 'mongoose';
 import User from '../../models/User';
+import ExceptionStatus from '../../utils/exceptionStatus';
+import ExceptionValidation from '../../utils/exceptionValidation';
 
 const update = async (data) => {
   const { id, ...rest } = data;
 
   const isValid = mongoose.Types.ObjectId.isValid(id);
 
-  if (!isValid) return { message: 'Necessário informar um id válido!' };
+  if (!isValid)
+    throw new ExceptionValidation({
+      message: 'Necessário informar um id válido!',
+      fieldWithError: id,
+    });
 
   const dataToUpdate = {};
 
@@ -23,13 +29,15 @@ const update = async (data) => {
     }
   })(rest);
 
-  const user = await User.findOneAndUpdate(id, dataToUpdate, {
+  const user = await User.findByIdAndUpdate(id, dataToUpdate, {
     returnDocument: 'after',
   });
 
-  if (!user) return { message: 'Usuário não foi encontrado!' };
-
-  await User.syncIndexes();
+  if (!user)
+    throw new ExceptionStatus({
+      message: 'Usuário não foi encontrado !',
+      status: 404,
+    });
 
   return user;
 };
